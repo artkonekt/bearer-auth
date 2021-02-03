@@ -15,21 +15,23 @@ declare(strict_types=1);
 namespace Konekt\BearerAuth\Http\Controllers;
 
 use Carbon\CarbonImmutable;
+use Exception;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Konekt\BearerAuth\Auth\AuthorizesApiUser;
 use Konekt\BearerAuth\Auth\HasTokenConfig;
+use Konekt\BearerAuth\Auth\TokenGenerator;
 use Konekt\BearerAuth\Auth\TokenVerifier;
 use Konekt\BearerAuth\Auth\VerifiesToken;
 use Konekt\BearerAuth\Exceptions\ApiAuthorizationException;
 use Konekt\BearerAuth\Http\Requests\AuthLoginRequest;
-use Konekt\BearerAuth\Auth\TokenGenerator;
 use Konekt\BearerAuth\Http\Requests\AuthTokenRequest;
-use Exception;
-use Illuminate\Support\Facades\Auth;
 
 class BearerAuthController extends Controller
 {
-    use HasTokenConfig, VerifiesToken, AuthorizesApiUser;
+    use HasTokenConfig;
+    use VerifiesToken;
+    use AuthorizesApiUser;
 
     private TokenGenerator $tokenGenerator;
 

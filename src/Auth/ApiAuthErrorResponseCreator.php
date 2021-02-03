@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Konekt\BearerAuth\Auth;
 
-use Konekt\BearerAuth\Exceptions\ApiAuthorizationException;
 use Illuminate\Http\JsonResponse;
+use Konekt\BearerAuth\Exceptions\ApiAuthorizationException;
 
 /**
  * @see https://tools.ietf.org/html/rfc6750#page-7

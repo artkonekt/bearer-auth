@@ -14,8 +14,8 @@ declare(strict_types=1);
 
 namespace Konekt\BearerAuth\Auth;
 
-use Konekt\BearerAuth\Exceptions\ApiAuthorizationException;
 use Illuminate\Support\Facades\Auth;
+use Konekt\BearerAuth\Exceptions\ApiAuthorizationException;
 
 trait AuthorizesApiUser
 {

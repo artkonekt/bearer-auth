@@ -14,20 +14,22 @@ declare(strict_types=1);
 namespace Konekt\BearerAuth\Http\Middleware;
 
 use Carbon\CarbonImmutable;
-use Konekt\BearerAuth\Auth\AuthorizesApiUser;
-use Konekt\BearerAuth\Auth\HasTokenConfig;
-use Konekt\BearerAuth\Auth\TokenVerifier;
-use Konekt\BearerAuth\Auth\VerifiesToken;
-use Konekt\BearerAuth\Exceptions\ApiAuthorizationException;
-use Konekt\BearerAuth\Auth\TokenGenerator;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Konekt\BearerAuth\Auth\AuthorizesApiUser;
+use Konekt\BearerAuth\Auth\HasTokenConfig;
+use Konekt\BearerAuth\Auth\TokenGenerator;
+use Konekt\BearerAuth\Auth\TokenVerifier;
+use Konekt\BearerAuth\Auth\VerifiesToken;
+use Konekt\BearerAuth\Exceptions\ApiAuthorizationException;
 
 class BearerTokenRequired
 {
-    use HasTokenConfig, VerifiesToken, AuthorizesApiUser;
+    use HasTokenConfig;
+    use VerifiesToken;
+    use AuthorizesApiUser;
 
     /** @var TokenGenerator */
     private TokenGenerator $tokenGenerator;

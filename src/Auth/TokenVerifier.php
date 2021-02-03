@@ -21,7 +21,8 @@ use Lcobucci\JWT\Validator;
 
 class TokenVerifier
 {
-    use HasTokenConfig, KnowsDomainName;
+    use HasTokenConfig;
+    use KnowsDomainName;
 
     public function __construct()
     {

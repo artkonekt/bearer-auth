@@ -21,7 +21,8 @@ use Lcobucci\JWT\Token;
 
 class TokenGenerator
 {
-    use HasTokenConfig, KnowsDomainName;
+    use HasTokenConfig;
+    use KnowsDomainName;
 
     private JWTBuilder $jwtTokenBuilder;
 
