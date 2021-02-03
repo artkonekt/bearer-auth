@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Contains the HasTokenSigner trait.
  *
@@ -13,19 +16,27 @@ namespace Konekt\BearerAuth\Auth;
 
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Signer\Key;
+use Lcobucci\JWT\Signer\Key\InMemory;
 
 trait HasTokenSigner
 {
-    /** @var Sha256 */
-    private $signer;
+    private ?Sha256 $signer = null;
 
-    /** @var Key|null */
-    private $key;
+    private ?Key $key = null;
+
+    private function getSigner(): Sha256
+    {
+        if (null === $this->signer) {
+            $this->signer = new Sha256();
+        }
+
+        return $this->signer;
+    }
 
     private function getKey(): Key
     {
-        if (!$this->key) {
-            $this->key = new Key(config('api.auth.token_signature'));
+        if (null === $this->key) {
+            $this->key = InMemory::plainText(config('api.auth.token_signature'));
         }
 
         return $this->key;

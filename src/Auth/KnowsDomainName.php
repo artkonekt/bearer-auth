@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Contains the KnowsDomainName trait.
  *
@@ -15,15 +18,14 @@ use Illuminate\Support\Facades\URL;
 
 trait KnowsDomainName
 {
-    /** @var string */
-    private $domain;
+    private ?string $domain = null;
 
     private function getDomainName(): string
     {
-        if (!$this->domain) {
+        if (null === $this->domain) {
             $this->domain = explode('://', URL::to('/'))[1];
 
-            if (false !== strpos($this->domain, ':')) {
+            if (str_contains($this->domain, ':')) {
                 $this->domain = explode(':', $this->domain)[0];
             }
         }

@@ -1,50 +1,63 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Contains the TokenParser class.
+ * Contains the TokenVerifier class.
  *
  * @copyright   Copyright (c) 2019 Attila Fulop
  * @author      Attila Fulop
  * @license     MIT
- *
  * @since       2019-09-20
  */
 
 namespace Konekt\BearerAuth\Auth;
 
-use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Token;
-use Lcobucci\JWT\ValidationData;
+use Lcobucci\JWT\Validation\Constraint\IssuedBy;
+use Lcobucci\JWT\Validation\Constraint\PermittedFor;
+use Lcobucci\JWT\Validation\Constraint\SignedWith;
+use Lcobucci\JWT\Validator;
 
 class TokenVerifier
 {
-    use HasTokenSigner, KnowsDomainName;
+    use HasTokenConfig, KnowsDomainName;
 
-    public function __construct(Sha256 $signer)
+    public function __construct()
     {
-        $this->signer = $signer;
+        $this->configuration = $this->getTokenConfig();
     }
 
     public function isSignatureValid(Token $token): bool
     {
-        return $token->verify($this->signer, $this->getKey());
+        return $this
+            ->validator()
+            ->validate($token, new SignedWith($this->getSigner(), $this->getKey()));
     }
 
     public function wasIssuedForUs(Token $token): bool
     {
-        $data = new ValidationData();
-        $data->setIssuer($this->getDomainName());
-        $data->setAudience($this->getDomainName());
-
-        return $token->validate($data);
+        return $this
+            ->validator()
+            ->validate(
+                $token,
+                new IssuedBy($this->getDomainName()),
+                new PermittedFor($this->getDomainName())
+            );
     }
 
     public function getUserId(Token $token): ?int
     {
-        return $token->hasClaim('sub') ? (int) $token->getClaim('sub') : null;
+        return (int) $token->claims()->get('sub');
     }
 
     public function isRefreshToken(Token $token): bool
     {
-        return $token->hasClaim('is_refresh');
+        return $token->claims()->has('is_refresh');
+    }
+
+    private function validator(): Validator
+    {
+        return $this->configuration->validator();
     }
 }

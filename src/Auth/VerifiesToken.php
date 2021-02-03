@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Contains the VerifiesToken trait.
  *
@@ -17,7 +20,7 @@ use Lcobucci\JWT\Token;
 trait VerifiesToken
 {
     /** @var TokenVerifier */
-    private $tokenVerifier;
+    private TokenVerifier $tokenVerifier;
 
     /**
      * @throws ApiAuthorizationException

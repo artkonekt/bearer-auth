@@ -1,26 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Contains the TokenGenerator class.
+ *
+ * @copyright   Copyright (c) 2021 Attila Fulop
+ * @author      Attila Fulop
+ * @license     MIT
+ * @since       2021-02-03
+ *
+ */
+
 namespace Konekt\BearerAuth\Auth;
 
-use App\User;
+use Carbon\CarbonImmutable;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Lcobucci\JWT\Builder as JWTBuilder;
-use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Token;
 
 class TokenGenerator
 {
-    use HasTokenSigner, KnowsDomainName;
+    use HasTokenConfig, KnowsDomainName;
 
-    /** @var JWTBuilder */
-    private $jwtTokenBuilder;
+    private JWTBuilder $jwtTokenBuilder;
 
-    public function __construct(JWTBuilder $jwtTokenBuilder, Sha256 $signer)
+    public function __construct()
     {
-        $this->jwtTokenBuilder = $jwtTokenBuilder;
-        $this->signer = $signer;
+        $this->jwtTokenBuilder = $this->getTokenConfig()->builder();
     }
 
-    public function generateAccessToken(User $user): Token
+    public function generateAccessToken(Authenticatable $user): Token
     {
         return $this
             ->getCommonTokenParts($user, $this->getAccessTokenTtl())
@@ -33,7 +43,7 @@ class TokenGenerator
         return (int) config('api.auth.access_token.ttl');
     }
 
-    public function generateRefreshToken(User $user): Token
+    public function generateRefreshToken(Authenticatable $user): Token
     {
         return $this
             ->getCommonTokenParts($user, config('api.auth.refresh_token.ttl'))
@@ -42,16 +52,16 @@ class TokenGenerator
             ;
     }
 
-    private function getCommonTokenParts(User $user, int $ttl): JWTBuilder
+    private function getCommonTokenParts(Authenticatable $user, int $ttl): JWTBuilder
     {
-        $now = time();
+        $now = CarbonImmutable::now();
 
         return $this->jwtTokenBuilder
             ->issuedAt($now)
             ->issuedBy($this->getDomainName())
-            ->relatedTo($user->id)
+            ->relatedTo($user->getAuthIdentifier())
             ->permittedFor($this->getDomainName())
-            ->expiresAt($now + $ttl)
+            ->expiresAt($now->addSeconds($ttl))
             ;
     }
 }
