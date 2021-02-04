@@ -41,13 +41,13 @@ class TokenGenerator
 
     public function getAccessTokenTtl(): int
     {
-        return (int) config('api.auth.access_token.ttl');
+        return (int) config('konekt.bearer_auth.access_token.ttl');
     }
 
     public function generateRefreshToken(Authenticatable $user): Token
     {
         return $this
-            ->getCommonTokenParts($user, config('api.auth.refresh_token.ttl'))
+            ->getCommonTokenParts($user, config('konekt.bearer_auth.refresh_token.ttl'))
             ->withClaim('is_refresh', true)
             ->getToken($this->signer, $this->getKey())
             ;

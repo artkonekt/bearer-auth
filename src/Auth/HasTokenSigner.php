@@ -36,7 +36,7 @@ trait HasTokenSigner
     private function getKey(): Key
     {
         if (null === $this->key) {
-            $this->key = InMemory::plainText(config('api.auth.token_signature'));
+            $this->key = InMemory::plainText(config('konekt.bearer_auth.token_signature'));
         }
 
         return $this->key;
