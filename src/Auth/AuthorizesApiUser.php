@@ -34,6 +34,10 @@ trait AuthorizesApiUser
      */
     private function checkIfUserIsActive(): void
     {
+        if (!config('konekt.bearer_auth.check.user_is_active')) {
+            return;
+        }
+
         if (!Auth::user()->is_active) {
             throw new ApiAuthorizationException(403, 'You are no longer an active user here');
         }
@@ -44,6 +48,10 @@ trait AuthorizesApiUser
      */
     private function checkIfUserApiAccessIsAllowed(): void
     {
+        if (!config('konekt.bearer_auth.check.user_type')) {
+            return;
+        }
+
         if (!Auth::user()->type->isApi()) {
             throw new ApiAuthorizationException(403, 'You are no longer an API user');
         }

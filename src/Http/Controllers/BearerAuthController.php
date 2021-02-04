@@ -52,10 +52,8 @@ class BearerAuthController extends Controller
             return response(['message' => 'Invalid credentials supplied'], 401);
         }
 
-        /** @todo make this optional, not all users might have type enum */
-        if (!Auth::user()->type->isApi()) {
-            return response(['message' => 'You are not allowed to access the API'], 403);
-        }
+        $this->checkIfUserIsActive();
+        $this->checkIfUserApiAccessIsAllowed();
 
         return response()->json([
             'access_token' => $this->tokenGenerator->generateAccessToken(Auth::user())->toString(),

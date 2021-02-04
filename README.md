@@ -9,3 +9,7 @@
 This package is an [RFC 6750](https://tools.ietf.org/html/rfc6750)
 compliant implementation of JWT based Bearer authentication for Laravel
 Applications.
+
+## Usage
+
+Refer to the [Documentation](https://konekt.dev/bearer-auth/docs) for more details.

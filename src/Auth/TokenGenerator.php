@@ -60,7 +60,7 @@ class TokenGenerator
         return $this->jwtTokenBuilder
             ->issuedAt($now)
             ->issuedBy($this->getDomainName())
-            ->relatedTo($user->getAuthIdentifier())
+            ->relatedTo((string)$user->getAuthIdentifier())
             ->permittedFor($this->getDomainName())
             ->expiresAt($now->addSeconds($ttl))
             ;
