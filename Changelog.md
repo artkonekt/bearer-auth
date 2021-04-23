@@ -1,5 +1,10 @@
 # Bearer Auth Changelog
 
+## 1.0.1
+##### 2021-04-23
+
+- Fixed incorrect controller name in auth route definition
+
 ## 1.0.0
 ##### 2021-02-04
 
