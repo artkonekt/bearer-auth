@@ -1,6 +1,6 @@
 <?php
 
 Route::name('auth.')->group(function () {
-    Route::post('/login', 'AuthController@login')->name('login');
-    Route::post('/token', 'AuthController@token')->name('token');
+    Route::post('/login', 'BearerAuthController@login')->name('login');
+    Route::post('/token', 'BearerAuthController@token')->name('token');
 });

@@ -1,1 +1,1 @@
-# Integrations
+# Error Responses

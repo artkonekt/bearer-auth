@@ -37,6 +37,24 @@ Now you should see this:
 
 ## Add The Token Endpoints
 
+If you use the default token routes provided by the package, add the
+`api-auth` middleware group to your application's HTTP Kernel:
+
+```php
+namespace App\Http;
+
+class Kernel extends HttpKernel
+{
+    protected $middlewareGroups = [
+        // ...
+        'api-auth' => [
+            'throttle:9,1',
+        ],
+    ];
+//...
+}
+```
+
 > **Optional**: Protect the token endpoints with more strict throttling, eg `throttle:9,1`
 
 ## Add Exception Handling
