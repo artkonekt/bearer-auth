@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Konekt\BearerAuth\Auth;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Konekt\BearerAuth\Exceptions\ApiAuthorizationException;
 
@@ -24,7 +25,7 @@ trait AuthorizesApiUser
      */
     private function authenticateUser($user): void
     {
-        if (!Auth::onceUsingId($user)) {
+        if (!$this->bearerAuth()->onceUsingId($user)) {
             throw new ApiAuthorizationException(401, 'You don\'t exist in our records');
         }
     }
@@ -38,7 +39,7 @@ trait AuthorizesApiUser
             return;
         }
 
-        if (!Auth::user()->is_active) {
+        if (!$this->bearerAuth()->user()->is_active) {
             throw new ApiAuthorizationException(403, 'You are no longer an active user here');
         }
     }
@@ -52,8 +53,13 @@ trait AuthorizesApiUser
             return;
         }
 
-        if (!Auth::user()->type->isApi()) {
+        if (!$this->bearerAuth()->user()->type->isApi()) {
             throw new ApiAuthorizationException(403, 'You are no longer an API user');
         }
+    }
+
+    private function bearerAuth(): Guard
+    {
+        return Auth::guard(config('konekt.bearer_auth.guard_name'));
     }
 }

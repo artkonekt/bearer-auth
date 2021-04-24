@@ -20,4 +20,5 @@ return [
         'user_is_active' => env('BEARER_CHECK_USER_IS_ACTIVE', true),
         'user_type' => env('BEARER_CHECK_USER_TYPE', true),
     ],
+    'guard_name' => env('BEARER_AUTH_GUARD_NAME', null)
 ];

@@ -48,7 +48,7 @@ class BearerAuthController extends Controller
             'password' => $request->getClientSecret(),
         ];
 
-        if (!Auth::once($credentials)) {
+        if (!$this->bearerAuth()->once($credentials)) {
             return response(['message' => 'Invalid credentials supplied'], 401);
         }
 
@@ -56,10 +56,10 @@ class BearerAuthController extends Controller
         $this->checkIfUserApiAccessIsAllowed();
 
         return response()->json([
-            'access_token' => $this->tokenGenerator->generateAccessToken(Auth::user())->toString(),
+            'access_token' => $this->tokenGenerator->generateAccessToken($this->bearerAuth()->user())->toString(),
             'token_type' => 'Bearer',
             'expires_in' => $this->tokenGenerator->getAccessTokenTtl(),
-            'refresh_token' => $this->tokenGenerator->generateRefreshToken(Auth::user())->toString(),
+            'refresh_token' => $this->tokenGenerator->generateRefreshToken($this->bearerAuth()->user())->toString(),
         ]);
     }
 
@@ -84,7 +84,7 @@ class BearerAuthController extends Controller
         $this->checkIfUserApiAccessIsAllowed();
 
         return response()->json([
-            'access_token' => $this->tokenGenerator->generateAccessToken(Auth::user())->toString(),
+            'access_token' => $this->tokenGenerator->generateAccessToken($this->bearerAuth()->user())->toString(),
             'token_type' => 'Bearer',
             'expires_in' => $this->tokenGenerator->getAccessTokenTtl(),
             /** @todo regenerate the refresh token if it expires sooner than the new access token */
