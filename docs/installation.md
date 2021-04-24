@@ -35,6 +35,41 @@ Now you should see this:
 
 ## Add The Bearer Auth Middleware
 
+To protect your API routes with the Bearer Authentication, you need to
+use the `BearerTokenRequired` middleware class in the given middleware
+group.
+
+```php
+namespace App\Http;
+
+class Kernel extends HttpKernel
+{
+    protected $middlewareGroups = [
+        // ...
+        'api' => [
+            'throttle:60,1',
+             \Konekt\BearerAuth\Http\Middleware\BearerTokenRequired::class
+        ],
+    ];
+//...
+}
+```
+
+> You can use other names than `api` for the middleware group
+
+Afterwards, add the middleware group to your routes:
+
+```php
+Route::middleware(['api'])->group(function () {
+    // Add your API endpoints here
+});
+```
+
+If you're using the `api` middleware group and the default Laravel setup,
+then you can simply add your routes to the `routes/api.php` file since
+the middleware group is already assigned in the
+`app/Providers/RouteServiceProvider.php` file.
+
 ## Add The Token Endpoints
 
 If you use the default token routes provided by the package, add the
