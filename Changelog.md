@@ -1,5 +1,10 @@
 # Bearer Auth Changelog
 
+## 1.1.0
+##### 2021-04-24
+
+- Added the possibility to define the Auth guard name in config
+
 ## 1.0.1
 ##### 2021-04-23
 
