@@ -1,5 +1,10 @@
 # Bearer Auth Changelog
 
+## Unreleased
+##### 2021-04-XX
+
+- Added: the built-in controller fires the Laravel Auth `Login` event
+
 ## 1.1.0
 ##### 2021-04-24
 

@@ -50,6 +50,27 @@ return [
 ];
 ```
 
+### Disable Firing Login Event
+
+The built-in controller emits Laravel's `Login` event after a successful
+authentication. This doesn't apply to subsequent tokens that are fetched
+using the refresh token.
+
+To disable the firing of the `Illuminate\Auth\Event\Login` event, set
+the `fire_login_event` config value to false:
+
+```php
+// config/concord.php
+return [
+    'modules' => [
+        //...
+        Konekt\BearerAuth\Providers\ModuleServiceProvider::class => [
+            'fire_login_event' => false,
+        ],
+    ],
+];
+```
+
 ### Changing Token TTLs
 
 To change the TTLs of the generated tokens, modify the

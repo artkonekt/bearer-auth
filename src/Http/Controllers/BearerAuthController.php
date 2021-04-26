@@ -54,6 +54,7 @@ class BearerAuthController extends Controller
 
         $this->checkIfUserIsActive();
         $this->checkIfUserApiAccessIsAllowed();
+        $this->fireLoginEvent();
 
         return response()->json([
             'access_token' => $this->tokenGenerator->generateAccessToken($this->bearerAuth()->user())->toString(),
