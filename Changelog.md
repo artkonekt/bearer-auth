@@ -1,7 +1,7 @@
 # Bearer Auth Changelog
 
-## Unreleased
-##### 2022-XX-YY
+## 1.3.0
+##### 2022-05-22
 
 - Dropped Laravel 6 and 7 support
 - Changed minimal Laravel 8 requirement to v8.83

@@ -2,5 +2,5 @@
 
 return [
     'name' => 'Bearer Auth Module',
-    'version' => '1.3-dev',
+    'version' => '1.3.0',
 ];
