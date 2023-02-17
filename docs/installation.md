@@ -29,7 +29,7 @@ Now you should see this:
 +----+--------------------+--------+---------+--------------------+-------------------+
 | #  | Name               | Kind   | Version | Id                 | Namespace         |
 +----+--------------------+--------+---------+--------------------+-------------------+
-| 1. | Bearer Auth Module | Module | 1.0.0   | konekt.bearer_auth | Konekt\BearerAuth |
+| 1. | Bearer Auth Module | Module | 1.4.0   | konekt.bearer_auth | Konekt\BearerAuth |
 +----+--------------------+--------+---------+--------------------+-------------------+
 ```
 

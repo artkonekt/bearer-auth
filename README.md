@@ -1,6 +1,6 @@
 # Bearer Auth for Laravel
 
-[![Tests](https://img.shields.io/github/workflow/status/artkonekt/bearer-auth/tests/master?style=flat-square)](https://github.com/artkonekt/bearer-auth/actions?query=workflow%3Atests)
+[![Tests](https://img.shields.io/github/actions/workflow/status/artkonekt/bearer-auth/tests.yml?branch=master&style=flat-square)](https://github.com/artkonekt/bearer-auth/actions?query=workflow%3Atests)
 [![Packagist Stable Version](https://img.shields.io/packagist/v/konekt/bearer-auth.svg?style=flat-square&label=stable)](https://packagist.org/packages/konekt/bearer-auth)
 [![Packagist downloads](https://img.shields.io/packagist/dt/konekt/bearer-auth.svg?style=flat-square)](https://packagist.org/packages/konekt/bearer-auth)
 [![StyleCI](https://styleci.io/repos/219820644/shield?branch=master)](https://styleci.io/repos/219820644)
