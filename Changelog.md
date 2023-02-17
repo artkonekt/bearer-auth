@@ -1,7 +1,7 @@
 # Bearer Auth Changelog
 
-## Unreleased
-##### 2023-XX-YY
+## 1.4.0
+##### 2023-02-17
 
 - Added Laravel 10 support
 - Added PHP 8.1 & 8.2 support
