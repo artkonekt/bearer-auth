@@ -17,7 +17,6 @@ namespace Konekt\BearerAuth\Http\Controllers;
 use Carbon\CarbonImmutable;
 use Exception;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 use Konekt\BearerAuth\Auth\AuthorizesApiUser;
 use Konekt\BearerAuth\Auth\HasTokenConfig;
 use Konekt\BearerAuth\Auth\TokenGenerator;
