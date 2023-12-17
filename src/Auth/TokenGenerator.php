@@ -36,7 +36,7 @@ class TokenGenerator
         return $this
             ->getCommonTokenParts($user, $this->getAccessTokenTtl())
             ->getToken($this->signer, $this->getKey())
-            ;
+        ;
     }
 
     public function getAccessTokenTtl(): int
@@ -50,7 +50,7 @@ class TokenGenerator
             ->getCommonTokenParts($user, config('konekt.bearer_auth.refresh_token.ttl'))
             ->withClaim('is_refresh', true)
             ->getToken($this->signer, $this->getKey())
-            ;
+        ;
     }
 
     private function getCommonTokenParts(Authenticatable $user, int $ttl): JWTBuilder
@@ -63,6 +63,6 @@ class TokenGenerator
             ->relatedTo((string)$user->getAuthIdentifier())
             ->permittedFor($this->getDomainName())
             ->expiresAt($now->addSeconds($ttl))
-            ;
+        ;
     }
 }
