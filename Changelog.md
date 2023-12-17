@@ -1,7 +1,7 @@
 # Bearer Auth Changelog
 
-## Unreleased
-##### 2023-XX-YY
+## 1.4.1
+##### 2023-12-17
 
 - Added PHP 8.3 support
 
