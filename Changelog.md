@@ -1,5 +1,12 @@
 # Bearer Auth Changelog
 
+## Unreleased
+##### 2024-XX-YY
+
+- Dropped PHP 8.0 support
+- Dropped Laravel 9 support
+- Added Laravel 11 support
+
 ## 1.4.1
 ##### 2023-12-17
 
