@@ -1,7 +1,7 @@
 # Bearer Auth Changelog
 
-## Unreleased
-##### 2026-XX-YY
+## 1.7.0
+##### 2026-04-17
 
 - Added Laravel 13 support
 - Added support for JWT library v5.0 (optional, v4.0 is still supported)
