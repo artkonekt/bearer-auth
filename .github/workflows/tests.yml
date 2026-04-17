@@ -11,7 +11,7 @@ jobs:
         php: [ '8.3', '8.4', '8.5' ]
         laravel: [ '11.46', '11.50', '12.50', '12.56', '13.0', '13.5' ]
         jwt: [ '4.0', '5.0' ]
-    name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
+    name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }} JWT ${{ matrix.jwt }}
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -24,7 +24,7 @@ jobs:
       - name: Lock Laravel Version
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}.*" --no-update -v &&
-          composer require "lcobucci/jwt:${{ matrix.jwt }}.*" --no-update -v
+          composer require "lcobucci/jwt:$^{{ matrix.jwt }}" --no-update -v
       - name: Composer Install
         run: composer install --prefer-dist --no-progress --no-interaction
       - name: Create Database
